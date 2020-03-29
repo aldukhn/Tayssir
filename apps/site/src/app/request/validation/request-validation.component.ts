@@ -1,11 +1,11 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'tayssir-request-details',
-  templateUrl: './request-details.component.html',
-  styleUrls: ['./request-details.component.css']
+  selector: 'tayssir-request-validation',
+  templateUrl: './request-validation.component.html',
+  styleUrls: ['./request-validation.component.css']
 })
-export class RequestDetailsComponent {
+export class RequestValidationComponent {
 
   @Input()
   request: any = {};

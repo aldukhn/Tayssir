@@ -1,5 +1,9 @@
 <h3 class="text-center">مرجو تأكيد معلوماتكم</h3>
 
+<a class="btn btn-primary guide-btn" (click)="cancel()">تصحيح معلومات</a>
+
+<a class="btn btn-success guide-btn">تأكيد معلومات</a>
+
 <ul class="list-group">
     <li class="list-group-item text-center">{{request.fullName}} : الاسم الكامل</li>
     <li class="list-group-item text-center">
@@ -21,6 +25,8 @@
     <li class="list-group-item text-center">{{request.jobType}} : مهنة</li>
     <li class="list-group-item text-center">{{request.jobAddress}} : عنوان مهنة</li>
     <li class="list-group-item text-center">{{request.authoruty}} : الاسم مقدم</li>
-    <li class="list-group-item text-center" *ngIf="request.cinRecto"><img [src]="request.cinRecto" width="100%"> الوجه أمامي البطاقة وطنية</li>
-    <li class="list-group-item text-center" *ngIf="request.cinVerso"><img [src]="request.cinVerso" width="100%"> الوجه خلفي البطاقة وطنية</li>
+    <li class="list-group-item text-center" *ngIf="request.cinRecto"><img [src]="request.cinRecto" width="100%"> الوجه
+        أمامي البطاقة وطنية</li>
+    <li class="list-group-item text-center" *ngIf="request.cinVerso"><img [src]="request.cinVerso" width="100%"> الوجه
+        خلفي البطاقة وطنية</li>
 </ul>

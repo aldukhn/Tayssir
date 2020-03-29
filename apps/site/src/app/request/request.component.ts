@@ -25,7 +25,7 @@ export class RequestComponent {
 
   communes = [];
 
-  
+
   phoneNumber = "^(06)[0-9]{8}";
 
   request: any = {};
@@ -54,7 +54,7 @@ export class RequestComponent {
     authoruty: new FormControl('', [Validators.required]),
     region: new FormControl('', [Validators.required]),
     province: new FormControl('', [Validators.required]),
-    community: new FormControl('', [Validators.required]),
+    community: new FormControl(''/*, [Validators.required]*/),
     city: new FormControl('')
   });
 
@@ -99,10 +99,7 @@ export class RequestComponent {
 
   onProvinceSelected(provinceId) {
     this.circles = circles.filter(c => c.province_id == provinceId);
-  }
-
-  onCircleSelected(circleId) {
-    this.communes = communes.filter(c => c.circle_id == circleId);
+    this.communes = communes.filter(c => c.province_id == provinceId);
   }
 
   onSubmitForms() {
@@ -149,4 +146,5 @@ export class RequestComponent {
     }
   }
 
+  
 }
