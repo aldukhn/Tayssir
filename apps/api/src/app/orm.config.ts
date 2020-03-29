@@ -1,7 +1,4 @@
-import { join } from 'path';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-
-console.log(join(__dirname, './**/*.entity{.ts,.js}'))
 
 export const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',

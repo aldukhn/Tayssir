@@ -7,19 +7,19 @@ import { Region } from '../region/region.entity';
 @Entity('wilaya', { schema: 'public' })
 export class Wilaya extends Administration {
   @OneToMany(
-    () => Circle,
+    type => Circle,
     circle => circle.wilaya
   )
   circles: Circle[];
 
   @OneToMany(
-    () => Commune,
+    type => Commune,
     commune => commune.wilaya
   )
   communes: Commune[];
 
   @ManyToOne(
-    () => Region,
+    type => Region,
     region => region.wilayas
   )
   @JoinColumn()

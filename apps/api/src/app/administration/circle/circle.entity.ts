@@ -6,13 +6,13 @@ import { Wilaya } from '../wilaya/wilaya.entity';
 @Entity('circle', { schema: 'public' })
 export class Circle extends Administration {
   @OneToMany(
-    () => Commune,
+    type => Commune,
     commune => commune.circle
   )
   communes: Commune[];
 
   @ManyToOne(
-    () => Wilaya,
+    type => Wilaya,
     wilaya => wilaya.circles
   )
   @JoinColumn()

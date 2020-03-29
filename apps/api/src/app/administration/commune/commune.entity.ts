@@ -1,8 +1,9 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Administration } from '../Administration';
 import { Circle } from '../circle/circle.entity';
-import { Caidat } from '../caidat/caidat.entity';
+// import { Caidat } from '../caidat/caidat.entity';
 import { Wilaya } from '../wilaya/wilaya.entity';
+import { Caidat } from '../caidat/caidat.entity';
 
 @Entity('commune', { schema: 'public' })
 export class Commune extends Administration {
@@ -16,21 +17,21 @@ export class Commune extends Administration {
   isCenter: boolean;
 
   @ManyToOne(
-    () => Circle,
+    type =>  Circle,
     circle => circle.communes
   )
   @JoinColumn()
   circle: Circle;
 
   @ManyToOne(
-    () => Caidat,
+    type =>  Caidat,
     caidat => caidat.communes
   )
   @JoinColumn()
   caidat: Caidat;
 
   @ManyToOne(
-    () => Wilaya,
+    type =>  Wilaya,
     wilaya => wilaya.communes
   )
   @JoinColumn()

@@ -5,7 +5,7 @@ import { Wilaya } from '../wilaya/wilaya.entity';
 @Entity('region', { schema: 'public' })
 export class Region extends Administration {
   @OneToMany(
-    () => Wilaya,
+    type =>  Wilaya,
     wilaya => wilaya.region
   )
   wilayas: Wilaya[];
