@@ -14,26 +14,6 @@
     line-height: 50px;
 }
 
-.guide-btn{
-    display: block;
-    width: 250px;
-    height: auto;
-    padding: 8px;
-    margin: 100px auto;
-    font-weight: 600;
-    font-size: 20px;
-    text-decoration: none;
-    color: #ffffff;
-    outline: none;
-    letter-spacing: 1.5px;
-}
-
-.guide-btn:hover{
-    color: #333333;
-    border: 1px solid #333333;
-    background-color: transparent;
-}
-
 #fill-your-info{
     padding: 100px 0px 100px 0px;
 }
