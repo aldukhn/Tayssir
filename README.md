@@ -13,11 +13,12 @@ This a platform dedicated to this category so that it helps collecting the least
 ## Technical Stack (voted)
 
 * Nx Monorepo
-* Angular
+* Angular (Front webapp)
+* React (Admin Webapp)
 * NestJS
+* TypeORM
 * Postgres
 * Github Actions
-* Zeit Now (Probably)
 
 ## Requirement
 
