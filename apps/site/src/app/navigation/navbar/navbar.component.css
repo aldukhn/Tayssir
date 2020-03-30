@@ -1,4 +1,17 @@
-.nav-title {
-    font-weight: bold;
-    font-size: 25px;
+nav .nav-wrapper{
+    background-color: #26A69A;
+}
+a{
+    text-decoration: none;
+    font-family: 'Markazi Text', serif;
+}
+a:hover{
+    color: #ffffff;
+}
+.brand-logo{
+    margin-left: 2em;
+}
+#nav-mobile li a{
+    margin-right: 2em;
+    font-size: 2em;
 }
