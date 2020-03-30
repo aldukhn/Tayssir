@@ -1,20 +1,17 @@
-/*Logo is currently hidden until we found one*/
-.logo-visibility{
-    visibility: hidden;
+nav .nav-wrapper{
+    background-color: #26A69A;
 }
-
-.nav-design{
-    background-color: transparent;
-    border-bottom: 1px solid #333333;
-}
-
-.nav-title{
-    width: 125px;
-    font-size: 25px;
+a{
+    text-decoration: none;
     font-family: 'Markazi Text', serif;
-    letter-spacing: .5px;
-    border: 1px solid #333333;
-    background-color: transparent;
-    color: #333333;
-    padding: 3px 0px 3px 0px;
+}
+a:hover{
+    color: #ffffff;
+}
+.brand-logo{
+    margin-left: 2em;
+}
+#nav-mobile li a{
+    margin-right: 2em;
+    font-size: 2em;
 }
