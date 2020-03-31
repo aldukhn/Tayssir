@@ -1,10 +1,12 @@
 <h3 class="text-center">مرجو تأكيد معلوماتكم</h3>
 
-<a class="btn btn-primary guide-btn" (click)="cancel()">تصحيح معلومات</a>
+<a class="btn btn-warning guide-btn" (click)="cancel()" *ngIf="!showValidationSection">تصحيح معلومات</a>
 
-<a class="btn btn-success guide-btn">تأكيد معلومات</a>
+<a class="btn btn-success guide-btn" (click)="submit()" *ngIf="!showValidationSection">تأكيد معلومات</a>
 
-<ul class="list-group">
+<tayssir-request-validation *ngIf="showValidationSection"></tayssir-request-validation>
+
+<ul class="list-group" *ngIf="!showValidationSection">
     <li class="list-group-item text-center">{{request.fullName}} : الاسم الكامل</li>
     <li class="list-group-item text-center">
         <span class="badge badge-primary" *ngIf="request.situation == 'single'">عازب</span>
@@ -25,6 +27,7 @@
     <li class="list-group-item text-center">{{request.jobType}} : مهنة</li>
     <li class="list-group-item text-center">{{request.jobAddress}} : عنوان مهنة</li>
     <li class="list-group-item text-center">{{request.authoruty}} : الاسم مقدم</li>
+    <li class="list-group-item text-center" *ngIf="request.commune">دائرة : {{request.commune.name_ar}}</li>
     <li class="list-group-item text-center" *ngIf="request.cinRecto"><img [src]="request.cinRecto" width="100%"> الوجه
         أمامي البطاقة وطنية</li>
     <li class="list-group-item text-center" *ngIf="request.cinVerso"><img [src]="request.cinVerso" width="100%"> الوجه
