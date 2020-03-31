@@ -7,7 +7,7 @@ export const ormConfig: TypeOrmModuleOptions = {
   username: 'chihab',
   password: '',
   database: 'tayssir',
-  synchronize: true,
+  // synchronize: true,
   logging: true,
   autoLoadEntities: true
   // cache: {
