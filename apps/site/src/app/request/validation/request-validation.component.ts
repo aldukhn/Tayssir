@@ -17,6 +17,9 @@ export class RequestValidationComponent {
   }
 
   cancel() {
-    this.onCancel.emit();
+    let ok = confirm("هل أنت متأكد ?");
+    if(ok) {
+      this.onCancel.emit();
+    }
   }
 }

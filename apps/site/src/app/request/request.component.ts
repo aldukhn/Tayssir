@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { regions } from './regions';
@@ -11,52 +11,76 @@ import { circles } from './circles';
   templateUrl: './request.component.html',
   styleUrls: ['./request.component.css']
 })
-export class RequestComponent {
+export class RequestComponent implements OnInit {
 
   @ViewChild('staticTabs', { static: false }) staticTabs: TabsetComponent;
 
   jobs = ["JOB 1", "JOB 2", "JOB 3"];
 
+  // load on init
   regions = regions;
 
+  // load on select
   provinces = [];
 
+  // load on select
   circles = [];
 
+  // load on select
   communes = [];
-
 
   phoneNumber = "^(06)[0-9]{8}";
 
-  request: any = {};
+  @Input()
+  request: any = {
+    situation: 'single',
+    childs: '0',
+    hasRamed: 'no',
+    state: 0
+  };
 
-  formSubmited = false;
+  personalInformationsForm;
+  jobInformationsForm;
+  locationInformationsForm;
 
-  personalInformationsForm = new FormGroup({
-    fullName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    address: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumber)]),
-    cin: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
-    cinRecto: new FormControl(''),
-    cinVerso: new FormControl(''),
-    situation: new FormControl('single'),
-    childs: new FormControl('0')
-  });
+  @Output() requestSubmited = new EventEmitter();
 
-  jobInformationsForm = new FormGroup({
-    jobType: new FormControl(null, [Validators.required]),
-    hasRamed: new FormControl('no', [Validators.required]),
-    ramed: new FormControl(''),
-    jobAddress: new FormControl('', [Validators.required])
-  });
+  constructor() {
+  }
 
-  locationInformationsForm = new FormGroup({
-    authoruty: new FormControl('', [Validators.required]),
-    region: new FormControl('', [Validators.required]),
-    province: new FormControl('', [Validators.required]),
-    community: new FormControl(''/*, [Validators.required]*/),
-    city: new FormControl('')
-  });
+  ngOnInit() {
+    if (localStorage.getItem('tayssir-request')) {
+      this.request = JSON.parse(localStorage.getItem('tayssir-request'));
+      this.onRegionSelected(this.request.region, false);
+      this.onProvinceSelected(this.request.province);
+    }
+
+    this.personalInformationsForm = new FormGroup({
+      fullName: new FormControl(this.request.fullName, [Validators.required, Validators.minLength(4)]),
+      address: new FormControl(this.request.address, [Validators.required]),
+      phone: new FormControl(this.request.phone, [Validators.required, Validators.pattern(this.phoneNumber)]),
+      cin: new FormControl(this.request.cin, [Validators.required, Validators.minLength(8), Validators.maxLength(8)]),
+      cinRecto: new FormControl(this.request.cinRecto),
+      cinVerso: new FormControl(this.request.cinVerso),
+      situation: new FormControl(this.request.situation),
+      childs: new FormControl(this.request.childs)
+    });
+
+    this.jobInformationsForm = new FormGroup({
+      jobType: new FormControl(this.request.jobType, [Validators.required]),
+      hasRamed: new FormControl(this.request.hasRamed, [Validators.required]),
+      ramed: new FormControl(this.request.ramed),
+      jobAddress: new FormControl(this.request.jobAddress, [Validators.required])
+    });
+
+    this.locationInformationsForm = new FormGroup({
+      authoruty: new FormControl(this.request.authoruty, [Validators.required]),
+      region: new FormControl(this.request.region, [Validators.required]),
+      province: new FormControl(this.request.province, [Validators.required]),
+      community: new FormControl(this.request.community, [Validators.required]),
+      city: new FormControl(this.request.city, [Validators.required])
+    });
+  }
 
   get personalInformationsControl() {
     return this.personalInformationsForm.controls;
@@ -70,31 +94,18 @@ export class RequestComponent {
     return this.locationInformationsForm.controls;
   }
 
-  constructor() {
-  }
-
-  onSubmitPI() {
-    this.staticTabs.tabs[1].active = true;
-  }
-
-  onSubmitJI() {
-    this.staticTabs.tabs[0].active = true;
-  }
-
-  goToPersonalInformations() {
-    this.staticTabs.tabs[2].active = true;
-  }
-
-  goToJobInformations() {
-    this.staticTabs.tabs[1].active = true;
-  }
-
   get situation() { return this.personalInformationsForm.get('situation').value; }
 
   get hasRamed() { return this.jobInformationsForm.get('hasRamed').value; }
 
-  onRegionSelected(regionId) {
+  onRegionSelected(regionId, load = true) {
     this.provinces = provinces.filter(p => p.region_id == regionId);
+    this.circles = [];
+    this.communes = [];
+    if (load) {
+      this.locationInformationsForm.get('community').patchValue('');
+      this.locationInformationsForm.get('city').patchValue('');
+    }
   }
 
   onProvinceSelected(provinceId) {
@@ -102,7 +113,8 @@ export class RequestComponent {
     this.communes = communes.filter(c => c.province_id == provinceId);
   }
 
-  onSubmitForms() {
+  onSubmitPI() {
+    this.goToJobInformations();
     // personal informations
     this.request.fullName = this.personalInformationsForm.get('fullName').value;
     this.request.address = this.personalInformationsForm.get('address').value;
@@ -110,19 +122,35 @@ export class RequestComponent {
     this.request.cin = this.personalInformationsForm.get('cin').value;
     this.request.situation = this.personalInformationsForm.get('situation').value;
     this.request.childs = this.personalInformationsForm.get('childs').value;
-    // personal informations
+
+    localStorage.setItem('tayssir-request', JSON.stringify(this.request));
+  }
+
+  onSubmitJI() {
+    this.goToLocationInformations();
     this.request.jobType = this.jobInformationsForm.get('jobType').value;
     this.request.hasRamed = this.jobInformationsForm.get('hasRamed').value;
     this.request.ramed = this.jobInformationsForm.get('ramed').value;
     this.request.jobAddress = this.jobInformationsForm.get('jobAddress').value;
-    // locationInformationsForm
+    localStorage.setItem('tayssir-request', JSON.stringify(this.request));
+  }
+
+  onSubmitForms() {
     this.request.authoruty = this.locationInformationsForm.get('authoruty').value;
     this.request.region = this.locationInformationsForm.get('region').value;
     this.request.province = this.locationInformationsForm.get('province').value;
     this.request.community = this.locationInformationsForm.get('community').value;
     this.request.city = this.locationInformationsForm.get('city').value;
-    this.formSubmited = true;
+
+    let commune = communes.filter(c => c.id == this.request.city);
+    if (commune) {
+      this.request.commune = commune[0];
+    }
+    this.request.state = 1;
+    localStorage.setItem('tayssir-request', JSON.stringify(this.request));
+    this.requestSubmited.emit(this.request);
   }
+
 
   onCinRectoChange(event) {
     if (event.target.files.length > 0) {
@@ -146,5 +174,17 @@ export class RequestComponent {
     }
   }
 
-  
+  // navigations 
+  goToPersonalInformations() {
+    this.staticTabs.tabs[2].active = true;
+  }
+
+  goToJobInformations() {
+    this.staticTabs.tabs[1].active = true;
+  }
+
+  goToLocationInformations() {
+    this.staticTabs.tabs[0].active = true;
+  }
+
 }
