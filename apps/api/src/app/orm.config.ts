@@ -17,7 +17,7 @@ export const ormConfig: TypeOrmModuleOptions = {
   username: 'postgres',
   password: 'postgres',
   database: 'tayssir_v2',
-  synchronize: true,
+  //synchronize: true,
   logging: true,
   autoLoadEntities: true,
   entities: [RequestEvent, Authority,Request,Funding,FundingActor,Circle,Wilaya,Commune,Caidat,Otp
