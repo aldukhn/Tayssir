@@ -1,5 +1,5 @@
 import {Entity, OneToMany, Column, ManyToOne, JoinColumn} from 'typeorm';
-import {BaseEntity} from '../base-entity';
+import {BaseEntity} from '../../base-entity';
 import {Funding} from '../funding/funding.entity';
 
 @Entity('funding-actor', {schema: 'public'})

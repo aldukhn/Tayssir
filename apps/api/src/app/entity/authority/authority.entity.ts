@@ -1,7 +1,8 @@
 import {Entity, OneToMany, Column, ManyToOne} from 'typeorm';
-import {BaseEntity} from '../base-entity';
+import {BaseEntity} from '../../base-entity';
 import {Request} from '../request/request.entity';
 import {Caidat} from "../administration/caidat/caidat.entity";
+import {RequestEvent} from "../request-event/request-event.entity";
 
 @Entity('authority', {schema: 'public'})
 export class Authority extends BaseEntity {
@@ -12,6 +13,12 @@ export class Authority extends BaseEntity {
   )
   assignedRequests: Request[];
 
+
+  @OneToMany(
+    type => RequestEvent,
+    requestEvent => requestEvent.request
+  )
+  events: RequestEvent[];
   @OneToMany(
     type => Request,
     request => request.processedByAuthority

@@ -1,11 +1,13 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm';
+import {PrimaryGeneratedColumn, Column} from 'typeorm';
 
 export class Administration {
-  @PrimaryGeneratedColumn()
-  id: string;
 
   @Column()
   code: string;
+
+  @Column({primary: true})
+  id: string;
+
 
   @Column()
   name: string;

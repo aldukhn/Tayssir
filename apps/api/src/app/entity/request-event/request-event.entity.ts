@@ -1,5 +1,5 @@
 import {Entity, ManyToOne, JoinColumn, Column} from 'typeorm';
-import {BaseEntity} from '../base-entity';
+import {BaseEntity} from '../../base-entity';
 import {Request} from '../request/request.entity';
 import {Authority} from "../authority/authority.entity";
 
@@ -13,10 +13,11 @@ export class RequestEvent extends BaseEntity {
   request: Request;
 
   @ManyToOne(
-    type => Authority
-  )
+    type => Authority,
+    authority => authority.events
+)
   @JoinColumn()
-  authority: Authority | null;
+  authority: Authority;
 
   @Column()
   newStatus: String;

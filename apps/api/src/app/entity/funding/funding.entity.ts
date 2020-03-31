@@ -1,5 +1,5 @@
 import {Entity, OneToMany, Column, ManyToOne, JoinColumn} from 'typeorm';
-import {BaseEntity} from '../base-entity';
+import {BaseEntity} from '../../base-entity';
 import {Request} from '../request/request.entity';
 import {FundingActor} from '../funding-actor/funding-actor.entity';
 

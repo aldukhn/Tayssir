@@ -1,10 +1,24 @@
 import {Entity, JoinColumn, ManyToOne, OneToMany, Column} from 'typeorm';
-import {BaseEntity} from '../base-entity';
+import {BaseEntity} from '../../base-entity';
 import {Authority} from '../authority/authority.entity';
 import {RequestEvent} from '../request-event/request-event.entity';
 import {Funding} from '../funding/funding.entity';
 import {Commune} from '../administration/commune/commune.entity';
-import {RequestStatus} from "@tayssir/api-interfaces";
+
+
+
+enum FamilyStatus {
+  SINGLE,MARRIED,DIVORCED,WIDOW
+}
+
+
+enum RequestStatus {
+  RECEIVED,
+  VALIDATED,
+  CONFIRMED,
+  REJECTED
+}
+
 
 
 @Entity('request', {schema: 'public'})
@@ -76,7 +90,7 @@ export class Request extends BaseEntity {
   @JoinColumn()
   commune: Commune;
 
-  @Column()
+  @Column({ enum: RequestStatus})
   status: RequestStatus;
   @Column()
   rejectReason: string;
@@ -99,7 +113,4 @@ export class Request extends BaseEntity {
   @Column()
   ramedCardNumber: string;
 
-}
-enum FamilyStatus {
-  SINGLE,MARRIED,DIVORCED,WIDOW
 }
