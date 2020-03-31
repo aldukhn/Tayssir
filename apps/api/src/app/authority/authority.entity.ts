@@ -5,9 +5,18 @@ import {Caidat} from "../administration/caidat/caidat.entity";
 
 @Entity('authority', {schema: 'public'})
 export class Authority extends BaseEntity {
-  @Column()
-  id: number;
 
+  @OneToMany(
+    type => Request,
+    request => request.assignedToAuthority
+  )
+  assignedRequests: Request[];
+
+  @OneToMany(
+    type => Request,
+    request => request.processedByAuthority
+  )
+  processedRequests: Request[];
   @Column()
   phone: number;
 
