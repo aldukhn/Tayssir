@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "module": "commonjs", // avoid circular dependency
     "types": ["node", "jest"],
     "emitDecoratorMetadata": true,
     "target": "es2015"

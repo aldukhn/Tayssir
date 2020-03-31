@@ -8,9 +8,9 @@ export const App = () => {
     <Admin
       title="Tayssir Admin"
       authProvider={authProvider}
-      dataProvider={jsonServerProvider('https://jsonplaceholder.typicode.com')}
+      dataProvider={jsonServerProvider('http://localhost:3333/api')}
     >
-      <Resource name="posts" list={ListGuesser}/>
+      <Resource name="communes" list={ListGuesser}/>
     </Admin>
   );
 };
