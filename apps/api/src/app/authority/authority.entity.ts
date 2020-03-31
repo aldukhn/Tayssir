@@ -1,8 +1,9 @@
-import { Entity, OneToMany, Column } from 'typeorm';
-import { BaseEntity } from '../base-entity';
-import { Request } from '../request/request.entity';
+import {Entity, OneToMany, Column, ManyToOne} from 'typeorm';
+import {BaseEntity} from '../base-entity';
+import {Request} from '../request/request.entity';
+import {Caidat} from "../administration/caidat/caidat.entity";
 
-@Entity('authority', { schema: 'public' })
+@Entity('authority', {schema: 'public'})
 export class Authority extends BaseEntity {
   @Column()
   id: number;
@@ -19,15 +20,21 @@ export class Authority extends BaseEntity {
   @Column()
   hashPwd: boolean;
 
-  // @OneToMany(
-  //   type => Request,
-  //   request => request.assignedToAuthority
-  // )
-  // assignedRequests: Request[];
+  @ManyToOne(
+    type => Authority
+  )
+  chiefAuthority: Authority | null;
 
-  // @OneToMany(
-  //   type => Request,
-  //   request => request.processedByAuthority
-  // )
-  // processedRequests: Request[];
+  @ManyToOne(
+    type => Caidat
+  )
+  caidat: Caidat;
+
+  @Column()
+  authorityRole: AuthorityRole;
+
+}
+
+enum AuthorityRole {
+  AGENT, CHIEF
 }

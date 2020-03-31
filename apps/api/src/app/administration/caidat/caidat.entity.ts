@@ -1,12 +1,12 @@
-import { Entity, OneToMany } from 'typeorm';
+import {Entity, JoinTable, ManyToMany, OneToMany} from 'typeorm';
 import { Administration } from '../Administration';
 import { Commune } from '../commune/commune.entity';
 
 @Entity('caidat', { schema: 'public' })
 export class Caidat extends Administration {
-  @OneToMany(
-    () => Commune,
-    commune => commune.caidat
+  @ManyToMany(
+    type => Commune
   )
+  @JoinTable()
   communes: Commune[];
 }

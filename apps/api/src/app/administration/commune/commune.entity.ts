@@ -24,13 +24,6 @@ export class Commune extends Administration {
   circle: Circle;
 
   @ManyToOne(
-    type => Caidat,
-    caidat => caidat.communes
-  )
-  @JoinColumn()
-  caidat: Caidat;
-
-  @ManyToOne(
     type => Wilaya,
     wilaya => wilaya.communes
   )

@@ -4,10 +4,10 @@ export const ormConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: '127.0.0.1',
   port: 5432,
-  username: 'chihab',
-  password: '',
+  username: 'postgres',
+  password: 'postgres',
   database: 'tayssir',
-  // synchronize: true,
+  synchronize: true,
   logging: true,
   autoLoadEntities: true
   // cache: {
