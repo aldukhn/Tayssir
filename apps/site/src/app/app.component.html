@@ -1,3 +1,20 @@
 <tayssir-navbar></tayssir-navbar>
 
-<tayssir-request></tayssir-request>
+
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+        </div>
+        <div class="col-10">
+            <tayssir-request *ngIf="request.state == 0" [request]="request"
+                (requestSubmited)="request = $event">
+            </tayssir-request>
+            <tayssir-request-details *ngIf="request.state == 1" 
+            [request]="request"
+            (onCancel)="request = $event">
+                
+            </tayssir-request-details>
+            <tayssir-request-validation *ngIf="request.state == 2" [request]="request" (onCancel)="onCancelValidation()"></tayssir-request-validation>
+        </div>
+    </div>
+</div>
