@@ -1,32 +1,34 @@
-import {Circle, Commune, Province, Region} from "./Region";
+import { Circle, Commune, Province, Region } from "./Region";
 
 export interface Request {
-  id: string;
-  fullName: string;
-  cin: string;
-  cinRecto: string;
-  cinVerso: string;
-  phone: string;
-  address: string;
-  jobAddress: string;
-  jobType: string;
-  region: Region;
-  province: Province;
-  circle: Circle;
-  commune: Commune;
-  authorityId: string;
-  status: RequestStatus;
-  assignedAuthorityId: string;
-  processedByAuthorityId: string;
-  processedByChiefAuthorityId: string;
-  rejectReason: string;
-  statusUpdateDate: Date;
-  creationDate: Date;
-  familyStatus: string;
-  childNumber: number;
-  hasRamed: boolean;
-  ramedCardNumber:  string;
+  id: string,
+  familyStatus: string, //  valus "single" or married
+  childs: string,
+  hasRamed: boolean,
+  state: number,
+  fullName: string,
+  address: string,
+  phone: string,
+  cin: string,
+  cinRecto: string,
+  cinVerso: string,
+  jobType: string,
+  ramed: string,
+  jobAddress: string,
+  authority_id: string,
+  region: string,
+  province: string,
+  city: string,
+  commune: Commune,
+  rejectReason: string,
+  status: RequestStatus,
+  assignedAuthorityId: string,
+  processedByAuthorityId: string,
+  processedByChiefAuthorityId: string,
+  verificationCode: number,
 }
+
+
 
 export enum RequestStatus {
   RECEIVED,
