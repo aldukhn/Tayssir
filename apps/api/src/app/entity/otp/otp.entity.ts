@@ -5,10 +5,10 @@ import { PrimaryGeneratedColumn, Column } from 'typeorm';
 @Entity('otp', { schema: 'public' })
 export class Otp extends BaseEntity {
   @Column()
-  phone:string;
+  phone: string;
   @Column()
-  verificationCode:string;
+  verificationCode: number;
   @Column()
-  expirationTime:number;
+  expirationTime: number;
 
 }

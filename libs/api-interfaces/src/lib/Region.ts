@@ -26,9 +26,13 @@ export interface Commune {
   id: string;
   code: string;
   name: string;
-  nameAr: string;
-  province: Province;
-  circle: Circle;
+  name_ar: string;
+  province_id: string;
+  circle_id: string;
+  region_id: string
+  is_municipal: boolean,
+  is_arrondissment: boolean,
+  is_centre: boolean
 }
 
 
@@ -37,7 +41,7 @@ export interface Caidat {
   name: string;
   nameAr: string;
   communeList: Array<Commune>;
-  description:string;
-  descriptionAr:string;
+  description: string;
+  descriptionAr: string;
 }
 

@@ -9,6 +9,7 @@ import { FundingActorsModule } from './entity/funding-actor/funding-actors.modul
 import { RequestorController } from './requestor/requestor.controller';
 import { MessageService } from '@tayssir/api-interfaces';
 import { RequestorService } from './requestor/requestor.service';
+import { OtpsModule } from './entity/otp/otps.module';
 
 @Module({
   imports: [
@@ -17,9 +18,10 @@ import { RequestorService } from './requestor/requestor.service';
     RequestsModule,
     RequestEventsModule,
     FundingsModule,
-    FundingActorsModule
+    FundingActorsModule,
+    OtpsModule
   ],
   controllers: [RequestorController],
   providers: [MessageService, RequestorService]
 })
-export class AppModule {}
+export class AppModule { }
