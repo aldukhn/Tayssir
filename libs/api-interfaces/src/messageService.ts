@@ -1,6 +1,6 @@
 import { Twilio } from 'twilio';
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus } from '@nestjs/common';
 import { properties } from '../../../apps/api/properties';
 import { Response } from './lib/Response';
 import { MessageListInstanceCreateOptions } from 'twilio/lib/rest/api/v2010/account/message';
@@ -8,10 +8,10 @@ import { MessageListInstanceCreateOptions } from 'twilio/lib/rest/api/v2010/acco
 @Injectable()
 export class MessageService {
 
-    sendSms(phoneNumber: string, messageBody: string): Response {
 
-        let response: Response = {} as Response;
-        // tslint:disable-next-line:prefer-const
+    async sendSms(phoneNumber: string, messageBody: string): Promise<Response> {
+
+        const response: Response = {} as Response;
         const client = new Twilio(properties.accountSid, properties.authToken);
 
         if (!this.validE164(phoneNumber)) {
@@ -23,19 +23,17 @@ export class MessageService {
             to: phoneNumber,
             from: properties.twilioNumber
         }
-
-        client.messages.create(textContent)
-            .then((message) => {
-                response.status = message.status;
-                response.message = "SMS Sent !";
-                response.code = 200;
-            })
-            .catch((error) => {
-                response.status = "failed";
-                response.code = 500;
-                response.message = error;
-            })
-
+        try {
+            const message = await client.messages.create(textContent);
+            response.status = message.status;
+            response.message = "! تم ارسال الرسالة بنجاح";
+            response.code = HttpStatus.OK;
+        } catch (error) {
+            response.status = "failed";
+            response.code = HttpStatus.INTERNAL_SERVER_ERROR;
+            response.message = 'تعدر إرسال الرسالة';
+            throw new Error(error.message);
+        }
         return response;
     }
 
