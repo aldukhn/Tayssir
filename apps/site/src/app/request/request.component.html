@@ -1,3 +1,9 @@
+<!--Page Content-->
+<div class="container">
+    <div class="row">
+        <div class="col-1">
+        </div>
+            <div class="col-10">
 
 <h1 class="display-6 text-center tayssir-title">
   الهدف من هذه المنصة هو مساندة الفئة الهشة من المجتمع المغربي خلال محنة الجائحة العالمية لفيروس كورونا
@@ -12,22 +18,22 @@
 
         <div class="form-group">
           <label class="arabic-align">إسم المقدم</label>
-          <input formControlName="authoruty" name="authoruty" type="text" class="form-control" placeholder="الاسم الكامل"
+          <input formControlName="authoruty" name="authoruty" type="text" class="form-control" placeholder="الإسم الكامل"
                  [ngClass]="{ 'is-invalid': (locationInformationsControl.authoruty.dirty || locationInformationsControl.authoruty.touched) && locationInformationsControl.authoruty.invalid }">
           <div class="invalid-feedback" *ngIf="(locationInformationsControl.authoruty.dirty || locationInformationsControl.authoruty.touched) && locationInformationsControl.authoruty.invalid">
-            الاسم مقدم إجباري
+            إسم المقدم إجباري
           </div>
         </div>
 
         <div class="form-group">
-          <label class="arabic-align">منطقة *</label>
+          <label class="arabic-align">المنطقة *</label>
           <select (change)='onRegionSelected($event.target.value)' formControlName="region" name="region"
                   class="form-control" [ngClass]="{ 'is-invalid': (locationInformationsControl.region.dirty || locationInformationsControl.region.touched) && locationInformationsControl.region.invalid }">
             <option></option>
             <option *ngFor="let region of regions" [value]="region.id">{{region.name_ar}}</option>
           </select>
           <div class="invalid-feedback" *ngIf="(locationInformationsControl.region.dirty || locationInformationsControl.region.touched) && locationInformationsControl.region.invalid">
-            منطقة إجباري
+            المنطقة إجباري
           </div>
         </div>
 
@@ -47,14 +53,14 @@
 
         <div class="form-group">
 
-          <label class="arabic-align">ناحية *</label>
+          <label class="arabic-align">الناحية *</label>
           <select formControlName="community" name="community" class="form-control" [ngClass]="{ 'is-invalid': (locationInformationsControl.community.dirty || locationInformationsControl.community.touched) && locationInformationsControl.community.invalid }">
             <option></option>
             <option *ngFor="let circle of circles" [value]="circle.id">{{circle.name_ar}}</option>
 
           </select>
           <div class="invalid-feedback" *ngIf="(locationInformationsControl.community.dirty || locationInformationsControl.community.touched) && locationInformationsControl.community.invalid">
-            ناحية إجباري
+            الناحية إجباري
           </div>
         </div>
 
@@ -67,7 +73,7 @@
 
           </select>
           <div class="invalid-feedback" *ngIf="(locationInformationsControl.city.dirty || locationInformationsControl.city.touched) && locationInformationsControl.city.invalid">
-            دائرة إجباري
+            الدائرة إجباري
           </div>
         </div>
 
@@ -76,11 +82,11 @@
         <a class="btn btn-primary return-back" (click)="goToJobInformations()">سابق</a>
       </form>
     </tab>
-    <tab heading="معلومات وظيفة" [disabled]="!personalInformationsForm.valid">
+    <tab heading="معلومات الوظيفة" [disabled]="!personalInformationsForm.valid">
       <form [formGroup]="jobInformationsForm" (ngSubmit)="onSubmitJI()">
 
         <div class="form-group">
-          <label class="arabic-align">بطاقة غمد</label>
+          <label class="arabic-align">بطاقة الراميد</label>
           <div class="form-check form-check-inline">
             <input formControlName="hasRamed" class="form-check-input" type="radio" name="hasRamed" value="yes">
             <label class="form-check-label">نعم</label>
@@ -92,20 +98,20 @@
         </div>
 
         <div class="form-group" *ngIf="hasRamed == 'yes'">
-          <label class="arabic-align">رقم بطاقة</label>
+          <label class="arabic-align">رقم البطاقة</label>
           <input type="text" formControlName="ramed" name="ramed" class="form-control" placeholder="رقم بطاقة">
         </div>
 
         <div class="form-group">
 
-          <label class="arabic-align">مهنة *</label>
+          <label class="arabic-align">المهنة *</label>
           <select class="form-control" formControlName="jobType" name="jobType" [ngClass]="{ 'is-invalid': (jobInformationsControl.jobType.dirty || jobInformationsControl.jobType.touched) && jobInformationsControl.jobType.invalid }">
             <option></option>
             <option *ngFor="let job of jobs" [value]="job">{{job}}</option>
 
           </select>
           <div class="invalid-feedback" *ngIf="(jobInformationsControl.jobType.dirty || jobInformationsControl.jobType.touched) && jobInformationsControl.jobType.invalid">
-            مهنة إجباري
+            المهنة إجباري
           </div>
         </div>
 
@@ -114,7 +120,7 @@
           <textarea formControlName="jobAddress" name="jobAddress" type="text" class="form-control"
                     placeholder="عنوان مهنة" [ngClass]="{ 'is-invalid': (jobInformationsControl.jobAddress.dirty || jobInformationsControl.jobAddress.touched) && jobInformationsControl.jobAddress.invalid }"></textarea>
           <div class="invalid-feedback" *ngIf="(jobInformationsControl.jobAddress.dirty || jobInformationsControl.jobAddress.touched) && jobInformationsControl.jobAddress.invalid">
-            عنوان مهنة إجباري
+            عنوان المهنة إجباري
           </div>
         </div>
 
@@ -164,12 +170,12 @@
         </div>
         <div class="form-group">
 
-          <label class="arabic-align">الوجه أمامي البطاقة وطنية</label>
+          <label class="arabic-align">الوجه الأمامي للبطاقة الوطنية</label>
           <input (change)="onCinRectoChange($event)" type="file" formControlName="cinRecto" name="cinRecto"
                  class="form-control" multiple="false" accept="image/x-png,image/gif,image/jpeg">
         </div>
         <div class="form-group">
-          <label class="arabic-align">الوجه خلفي البطاقة وطنية</label>
+          <label class="arabic-align">الوجه الخلفي للبطاقة الوطنية</label>
           <input (change)="onCinVersoChange($event)" type="file" formControlName="cinVerso" name="cinVerso"
                  class="form-control" accept="image/x-png,image/gif,image/jpeg">
         </div>
@@ -189,8 +195,8 @@
           </div>
         </div>
         <div class="form-group" *ngIf="situation != 'single'">
-          <label class="arabic-align">عدد أبناء</label>
-          <input type="number" formControlName="childs" name="childs" class="form-control" placeholder="عدد أبناء">
+          <label class="arabic-align">عدد الأبناء</label>
+          <input type="number" formControlName="childs" name="childs" class="form-control" placeholder="عدد الأبناء">
 
         </div>
 
@@ -201,4 +207,9 @@
     </tab>
   </tabset>
 
+            </div>
+        </div>
+            <div class="col-1">
+            </div>
+    </div>
 </div>
