@@ -13,6 +13,7 @@ export class OtpsService extends TypeOrmCrudService<Otp> {
 
   async save(otp: Otp): Promise<Otp> {
     const currentDateTimeMillis = this.getCurrentDateMillis();
+    console.log("****************rrraaarrr*********** ", currentDateTimeMillis);
     const storedOtp = await this.repo.find({ where: { phone: otp.phone, expirationTime: LessThan(currentDateTimeMillis) } });
 
     if (storedOtp.length === 0) {
@@ -35,6 +36,6 @@ export class OtpsService extends TypeOrmCrudService<Otp> {
 
   getCurrentDateMillis() {
     const nowDate = new Date();
-    return nowDate.getTime() / 1000 + 900;
+    return Math.floor(nowDate.getTime() / 1000 + 900);
   }
 }
