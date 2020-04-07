@@ -110,4 +110,7 @@ export class Request extends BaseEntity {
   @Column()
   ramedCardNumber: string;
 
+  @Column()
+  authorityName: string;
+
 }
