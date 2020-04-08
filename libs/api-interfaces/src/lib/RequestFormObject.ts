@@ -1,6 +1,6 @@
 import { Circle, Commune, Province, Region } from "./Region";
 
-export interface Request {
+export interface RequestFormObject {
   id: string,
   familyStatus: string, //  valus "single" or married
   childs: string,

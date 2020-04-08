@@ -1,18 +1,18 @@
-import {Entity, JoinColumn, ManyToOne, OneToMany, Column} from 'typeorm';
-import {BaseEntity} from '../../base-entity';
-import {Authority} from '../authority/authority.entity';
-import {RequestEvent} from '../request-event/request-event.entity';
-import {Funding} from '../funding/funding.entity';
-import {Commune} from '../administration/commune/commune.entity';
+import { Entity, JoinColumn, ManyToOne, OneToMany, Column } from 'typeorm';
+import { BaseEntity } from '../../base-entity';
+import { Authority } from '../authority/authority.entity';
+import { RequestEvent } from '../request-event/request-event.entity';
+import { Funding } from '../funding/funding.entity';
+import { Commune } from '../administration/commune/commune.entity';
 
 
 
-enum FamilyStatus {
-  SINGLE,MARRIED,DIVORCED,WIDOW
+export enum FamilyStatus {
+  SINGLE, MARRIED, DIVORCED, WIDOW
 }
 
 
-enum RequestStatus {
+export enum RequestStatus {
   RECEIVED,
   VALIDATED,
   CONFIRMED,
@@ -21,7 +21,7 @@ enum RequestStatus {
 
 
 
-@Entity('request', {schema: 'public'})
+@Entity('request', { schema: 'public' })
 export class Request extends BaseEntity {
   @ManyToOne(
     type => Authority,
@@ -37,10 +37,9 @@ export class Request extends BaseEntity {
   @JoinColumn()
   processedByAuthority: Authority;
 
-
   @ManyToOne(
     type => Authority
-//    authority => authority.processedRequests
+    //    authority => authority.processedRequests
   )
   @JoinColumn()
   processedByChiefAuthorityId: Authority;
@@ -90,16 +89,14 @@ export class Request extends BaseEntity {
   @JoinColumn()
   commune: Commune;
 
-  @Column({ enum: RequestStatus})
+  @Column({ enum: RequestStatus })
   status: RequestStatus;
-  @Column()
+
+  @Column({ nullable: true })
   rejectReason: string;
 
-  @Column()
+  @Column({ nullable: true })
   statusUpdateDate: Date;
-
-  @Column()
-  creationDate: Date;
 
   @Column()
   familyStatus: FamilyStatus;
@@ -112,5 +109,8 @@ export class Request extends BaseEntity {
 
   @Column()
   ramedCardNumber: string;
+
+  @Column()
+  authorityName: string;
 
 }

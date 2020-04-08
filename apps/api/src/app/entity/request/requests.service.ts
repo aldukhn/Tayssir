@@ -9,4 +9,13 @@ export class RequestsService extends TypeOrmCrudService<Request> {
   constructor(@InjectRepository(Request) repo) {
     super(repo);
   }
+
+
+  /**
+   * 
+   * @param request 
+   */
+  saveRequest(request: Request) {
+    this.repo.save(request);
+  }
 }
